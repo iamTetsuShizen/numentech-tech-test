@@ -1,5 +1,8 @@
 <script setup>
+
 import { Head, Link } from '@inertiajs/vue3';
+import  TodoList from '../Components/TodoList.vue';
+import  CreateTodo from '../Components/CreateTodo.vue';
 
 defineProps({
     canLogin: {
@@ -16,15 +19,17 @@ defineProps({
         type: String,
         required: true,
     },
+    components: { TodoList, CreateTodo },
 });
+
 </script>
 
 <template>
     <Head title="Numentech Todo App" />
     <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
     >
-        <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+        <div v-if="canLogin" class="">
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('logout')"
@@ -48,16 +53,16 @@ defineProps({
                 >
             </template>
         </div>
-        <div 
-            class=""
-        >
-            <h1> TODO listing</h1>
-            <Todo-card>
-                
-            </Todo-card>
 
+        <div class="text-gray-600">
+            Here goes the list of todos component
+            <TodoList/>
         </div>
-        
+
+        <div v-if="canLogin" class="text-gray-600">
+            Here goes the form component
+            <CreateTodo/>
+        </div>
     </div>
 </template>
 
